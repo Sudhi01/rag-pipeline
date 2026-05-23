@@ -2,12 +2,9 @@ venv/
 __pycache__/
 *.pyc
 .env
-data/chroma/
 data/chroma_fixed/
 data/chroma_recursive/
 data/chroma_semantic/
-data/bm25_index.pkl
-data/chunks_store.json
 fastapi/
 *.egg-info/
 .DS_Store
