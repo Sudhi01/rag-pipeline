@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 import json
-import os
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -43,15 +42,6 @@ def root():
             "POST /v1/ingest",
             "GET /v1/eval/results"
         ]
-    }
-
-@app.get("/debug")
-def debug():
-    key = os.environ.get("OPENAI_API_KEY", "NOT FOUND")
-    return {
-        "key_found": key != "NOT FOUND",
-        "key_prefix": key[:10] if key != "NOT FOUND" else "NOT FOUND",
-        "env_vars": list(os.environ.keys())
     }
 
 @app.post("/v1/ask")
