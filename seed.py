@@ -1,18 +1,45 @@
 """
-Run this once after docker-compose up to index the documents.
-python seed.py
+Run this once after deployment to index the documents.
+Call POST /v1/ingest endpoint or run this script directly.
 """
-from src.ingestion.document_loader import load_documents_from_directory
-from src.ingestion.chunker import chunk_documents
-from src.ingestion.embedder import embed_and_store_chunks
-from src.ingestion.bm25_index import build_bm25_index
+import subprocess
+import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-print("Seeding RAG pipeline with FastAPI documentation...")
-docs = load_documents_from_directory("fastapi/docs/en/docs")
-chunks = chunk_documents(docs, strategy="recursive")
-embed_and_store_chunks(chunks)
-build_bm25_index(chunks)
-print("Done. RAG pipeline ready.")
+def seed():
+    # Clone FastAPI docs if not present
+    if not os.path.exists("fastapi"):
+        print("Cloning FastAPI docs...")
+        subprocess.run([
+            "git", "clone",
+            "https://github.com/tiangolo/fastapi.git",
+            "--depth=1"
+        ], check=True)
+        print("Cloned successfully")
+
+    from src.ingestion.document_loader import load_documents_from_directory
+    from src.ingestion.chunker import chunk_documents
+    from src.ingestion.embedder import embed_and_store_chunks
+    from src.ingestion.bm25_index import build_bm25_index
+
+    print("Loading documents...")
+    docs = load_documents_from_directory("fastapi/docs/en/docs")
+    
+    print("Chunking...")
+    chunks = chunk_documents(docs, strategy="recursive")
+    
+    print("Embedding and storing...")
+    embed_and_store_chunks(chunks)
+    
+    print("Building BM25 index...")
+    build_bm25_index(chunks)
+    
+    print("Done. RAG pipeline ready.")
+
+if __name__ == "__main__":
+    seed()
+
+if __name__ == "__main__":
+    seed()

@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 import json
+import subprocess
+import os
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -60,6 +62,11 @@ def ask_question(request: QuestionRequest):
             "sources": result["sources"],
             "chunks_used": result["chunks_used"]
         }
+    except FileNotFoundError:
+        raise HTTPException(
+            status_code=503,
+            detail="Index not built yet. Call POST /v1/ingest first."
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -70,7 +77,7 @@ def list_documents():
         chroma_client = chromadb.PersistentClient(path="data/chroma")
         collection = chroma_client.get_or_create_collection("rag_documents")
         count = collection.count()
-        
+
         chunks_path = Path("data/chunks_store.json")
         sources = []
         if chunks_path.exists():
@@ -80,7 +87,7 @@ def list_documents():
                 c["metadata"].get("filename", "unknown")
                 for c in chunks
             ))
-        
+
         return {
             "total_chunks": count,
             "total_documents": len(sources),
@@ -92,6 +99,16 @@ def list_documents():
 @app.post("/v1/ingest")
 def ingest_documents(request: IngestRequest):
     try:
+        # Auto clone FastAPI docs if not present
+        if not os.path.exists("fastapi"):
+            print("Cloning FastAPI docs...")
+            subprocess.run([
+                "git", "clone",
+                "https://github.com/tiangolo/fastapi.git",
+                "--depth=1"
+            ], check=True)
+            print("Cloned successfully")
+
         from src.ingestion.document_loader import load_documents_from_directory
         from src.ingestion.chunker import chunk_documents
         from src.ingestion.embedder import embed_and_store_chunks
@@ -99,7 +116,10 @@ def ingest_documents(request: IngestRequest):
 
         docs = load_documents_from_directory(request.directory)
         if not docs:
-            raise HTTPException(status_code=400, detail="No documents found")
+            raise HTTPException(
+                status_code=400,
+                detail="No documents found in directory"
+            )
 
         chunks = chunk_documents(docs, strategy=request.strategy)
         embed_result = embed_and_store_chunks(chunks)
@@ -113,6 +133,8 @@ def ingest_documents(request: IngestRequest):
             "chunks_skipped": embed_result["skipped"],
             "strategy": request.strategy
         }
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
