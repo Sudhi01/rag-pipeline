@@ -1,0 +1,219 @@
+{
+  "total_questions": 10,
+  "avg_correctness": 0.835,
+  "avg_source_retrieval": 0.75,
+  "avg_confidence": 0.893,
+  "citation_accuracy": 1.0,
+  "results": [
+    {
+      "id": "q001",
+      "question": "How do I create a basic FastAPI application?",
+      "difficulty": "easy",
+      "answer": "To create a basic FastAPI application, follow these steps:\n\n1. **Create the Project Structure**: \n   - Create a directory for your application, for example, `app`.\n   - Inside this directory, create an empty file named `__init__.py` to make it a package [1].\n\n2. **Create the Main Application File**:\n   - Inside the `app` directory, create a file named `main.py`.\n   - In `main.py`, import FastAPI and create an instance of it. This instance will be the main point of interaction for your API [3].\n   - Define your API endpoints using decorators. For example, you can create a root endpoint and an endpoint to read items by ID as shown below:\n\n   ```python\n   from fastapi import FastAPI\n\n   app = FastAPI()\n\n   @app.get(\"/\")\n   def read_root():\n       return {\"Hello\": \"World\"}\n\n   @app.get(\"/items/{item_id}\")\n   def read_item(item_id: int, q: str | None = None):\n       return {\"item_id\": item_id, \"q\": q}\n   ```\n   This code sets up a basic FastAPI application with two endpoints [1].\n\n3. **Install FastAPI**:\n   - Make sure you have FastAPI installed in your environment. You can install it using pip with the command: `pip install \"fastapi[standard]\"` [4].\n\n4. **Run the Application**:\n   - You can run the application using a command like `uvicorn app.main:app --reload` to start the development server and see your API in action [2].\n\nThis setup provides a simple FastAPI application with a couple of endpoints to get you started.",
+      "correctness_scores": {
+        "correctness": 0.8,
+        "relevance": 0.8,
+        "topic_coverage": 0.6,
+        "overall": 0.73
+      },
+      "source_retrieval_score": 1.0,
+      "confidence": {
+        "retrieval_confidence": 0.84,
+        "citation_coverage": 1.0,
+        "completeness": 0.9,
+        "composite_score": 0.916
+      },
+      "citations_verified": 4,
+      "citations_supported": 4
+    },
+    {
+      "id": "q002",
+      "question": "How do I define path parameters in FastAPI?",
+      "difficulty": "easy",
+      "answer": "In FastAPI, you can define path parameters by including them in the path string of your route and then declaring them as function parameters in your path operation function. FastAPI will automatically recognize these parameters and extract them from the path. You can declare multiple path parameters, and they will be detected by name [2]. Additionally, FastAPI allows path parameters to have default values, which can be useful in certain scenarios [4]. \n\nIf you need to include a path within a path parameter, FastAPI supports this using internal tools from Starlette, although OpenAPI does not natively support this feature [3]. \n\nI don't have enough information in the provided context to answer this question fully.",
+      "correctness_scores": {
+        "correctness": 0.8,
+        "relevance": 0.8,
+        "topic_coverage": 0.6,
+        "overall": 0.73
+      },
+      "source_retrieval_score": 1.0,
+      "confidence": {
+        "retrieval_confidence": 0.72,
+        "citation_coverage": 1.0,
+        "completeness": 0.3,
+        "composite_score": 0.748
+      },
+      "citations_verified": 3,
+      "citations_supported": 3
+    },
+    {
+      "id": "q003",
+      "question": "What is the difference between path parameters and query parameters?",
+      "difficulty": "medium",
+      "answer": "Path parameters and query parameters are used differently in FastAPI:\n\n- **Path Parameters**: These are part of the URL path itself. They are used to identify a specific resource. For example, in the URL `/items/{item_id}`, `item_id` is a path parameter. Path parameters are declared in the path of the URL and are required by default [3].\n\n- **Query Parameters**: These are key-value pairs that appear after the `?` in a URL and are used to filter or modify the response. For example, in the URL `http://127.0.0.1:8000/items/?skip=0&limit=10`, `skip` and `limit` are query parameters. Query parameters are optional by default and can be given default values [1], [4].\n\nFastAPI distinguishes between them based on their declaration and usage in the function signature, and they don't need to be declared in any specific order [2].",
+      "correctness_scores": {
+        "correctness": 1.0,
+        "relevance": 1.0,
+        "topic_coverage": 1.0,
+        "overall": 1.0
+      },
+      "source_retrieval_score": 0.5,
+      "confidence": {
+        "retrieval_confidence": 0.72,
+        "citation_coverage": 1.0,
+        "completeness": 0.9,
+        "composite_score": 0.868
+      },
+      "citations_verified": 4,
+      "citations_supported": 4
+    },
+    {
+      "id": "q004",
+      "question": "How do I add request body validation in FastAPI?",
+      "difficulty": "medium",
+      "answer": "To add request body validation in FastAPI, you can use Pydantic models. FastAPI will automatically validate the request body against the Pydantic model you define. You can declare path parameters and request body at the same time, and FastAPI will distinguish between them by taking path parameters from the path and request body parameters from the Pydantic models [2]. If you have multiple body parameters, FastAPI will use the parameter names as keys in the body and expect a JSON object structured accordingly [3]. Additionally, you can declare validation and metadata inside Pydantic models using Pydantic's `Field` [5].",
+      "correctness_scores": {
+        "correctness": 1.0,
+        "relevance": 1.0,
+        "topic_coverage": 1.0,
+        "overall": 1.0
+      },
+      "source_retrieval_score": 1.0,
+      "confidence": {
+        "retrieval_confidence": 0.7,
+        "citation_coverage": 1.0,
+        "completeness": 0.9,
+        "composite_score": 0.86
+      },
+      "citations_verified": 3,
+      "citations_supported": 3
+    },
+    {
+      "id": "q005",
+      "question": "How do I add OAuth2 authentication to FastAPI?",
+      "difficulty": "hard",
+      "answer": "To add OAuth2 authentication to FastAPI, you can use the `OAuth2PasswordBearer` class provided by FastAPI. This class is used to implement OAuth2 with the Password flow, using a Bearer token [2]. You can define your security scheme using this class and then use it in your path operations to secure them. FastAPI also supports other OAuth2 flows and security features, but `OAuth2PasswordBearer` is a common choice for scenarios where you want to authenticate users with a username and password [4]. Additionally, FastAPI provides tools for handling OAuth2 security scopes if needed [3].",
+      "correctness_scores": {
+        "correctness": 1.0,
+        "relevance": 1.0,
+        "topic_coverage": 1.0,
+        "overall": 1.0
+      },
+      "source_retrieval_score": 0.5,
+      "confidence": {
+        "retrieval_confidence": 0.88,
+        "citation_coverage": 1.0,
+        "completeness": 0.9,
+        "composite_score": 0.932
+      },
+      "citations_verified": 3,
+      "citations_supported": 3
+    },
+    {
+      "id": "q006",
+      "question": "What is dependency injection in FastAPI?",
+      "difficulty": "medium",
+      "answer": "Dependency injection in FastAPI is a system that allows your code, specifically your path operation functions, to declare the dependencies they require to function. FastAPI then takes care of providing these dependencies to your code, effectively \"injecting\" them. This system is designed to be powerful yet simple to use, making it easy for developers to integrate other components with FastAPI [2], [3]. It allows FastAPI to execute and inject dependencies before the path operation function runs [4].",
+      "correctness_scores": {
+        "correctness": 1.0,
+        "relevance": 1.0,
+        "topic_coverage": 1.0,
+        "overall": 1.0
+      },
+      "source_retrieval_score": 0.5,
+      "confidence": {
+        "retrieval_confidence": 0.96,
+        "citation_coverage": 1.0,
+        "completeness": 0.9,
+        "composite_score": 0.964
+      },
+      "citations_verified": 3,
+      "citations_supported": 3
+    },
+    {
+      "id": "q007",
+      "question": "How do I deploy FastAPI with Docker?",
+      "difficulty": "medium",
+      "answer": "To deploy a FastAPI application with Docker, you typically build a Linux container image using Docker. This process involves creating a Dockerfile that specifies how to build the image. If your FastAPI application is a single file, such as `main.py`, your project structure might include a `Dockerfile`, `main.py`, and `requirements.txt`. You would adjust the paths in the Dockerfile to copy the necessary files into the container [2].\n\nBuilding a Docker image for FastAPI is often done from scratch using the official Python image. This approach is suitable for various deployment scenarios, such as using Kubernetes, running on a Raspberry Pi, or deploying to a cloud service that supports container images [3]. The process involves setting up a Dockerfile to run a single Uvicorn process, which is a common strategy when using distributed container management systems like Kubernetes [4].",
+      "correctness_scores": {
+        "correctness": 0.8,
+        "relevance": 0.8,
+        "topic_coverage": 0.6,
+        "overall": 0.73
+      },
+      "source_retrieval_score": 1.0,
+      "confidence": {
+        "retrieval_confidence": 0.86,
+        "citation_coverage": 1.0,
+        "completeness": 0.9,
+        "composite_score": 0.924
+      },
+      "citations_verified": 3,
+      "citations_supported": 3
+    },
+    {
+      "id": "q008",
+      "question": "How do I add CORS support to FastAPI?",
+      "difficulty": "easy",
+      "answer": "To add CORS support to a FastAPI application, you can use the `CORSMiddleware`. Here are the steps:\n\n1. Import `CORSMiddleware` from FastAPI:\n   ```python\n   from fastapi.middleware.cors import CORSMiddleware\n   ```\n\n2. Create a list of allowed origins as strings.\n\n3. Add `CORSMiddleware` as a middleware to your FastAPI application, specifying the allowed origins and any other CORS settings you need.\n\nThis setup allows you to configure your FastAPI application to handle CORS requests appropriately [1], [2].",
+      "correctness_scores": {
+        "correctness": 0.8,
+        "relevance": 0.8,
+        "topic_coverage": 0.6,
+        "overall": 0.73
+      },
+      "source_retrieval_score": 1.0,
+      "confidence": {
+        "retrieval_confidence": 0.84,
+        "citation_coverage": 1.0,
+        "completeness": 0.9,
+        "composite_score": 0.916
+      },
+      "citations_verified": 2,
+      "citations_supported": 2
+    },
+    {
+      "id": "q009",
+      "question": "How do I handle file uploads in FastAPI?",
+      "difficulty": "medium",
+      "answer": "To handle file uploads in FastAPI, you can define path operation function parameters to be of the type `UploadFile` or `File`. You can import `UploadFile` directly from FastAPI using:\n\n```python\nfrom fastapi import UploadFile\n```\n\nWhen handling file uploads, the form is encoded as `multipart/form-data`. If you declare the type of your path operation function parameter as `UploadFile`, FastAPI will manage the file for you, allowing you to access attributes like `file`, `filename`, `size`, `headers`, `content_type`, and methods like `read`, `write`, `seek`, and `close` [1].\n\nAlternatively, if you declare the parameter as `bytes`, FastAPI will read the file content into memory and provide it to you as `bytes`. This approach is suitable for small files since the entire content is stored in memory [3].\n\nFor multiple file uploads, you can declare a list of `UploadFile` or `bytes`, and FastAPI will provide you with a list of the respective type [5].",
+      "correctness_scores": {
+        "correctness": 1.0,
+        "relevance": 1.0,
+        "topic_coverage": 1.0,
+        "overall": 1.0
+      },
+      "source_retrieval_score": 1.0,
+      "confidence": {
+        "retrieval_confidence": 0.92,
+        "citation_coverage": 1.0,
+        "completeness": 0.9,
+        "composite_score": 0.948
+      },
+      "citations_verified": 3,
+      "citations_supported": 3
+    },
+    {
+      "id": "q010",
+      "question": "What is the fastest way to run FastAPI in production?",
+      "difficulty": "hard",
+      "answer": "The fastest way to run FastAPI in production is to use the `fastapi run` command. This command starts FastAPI in production mode, with auto-reload disabled, and listens on the IP address `0.0.0.0`, making it publicly accessible [2]. Internally, the FastAPI CLI uses Uvicorn, a high-performance, production-ready ASGI server [3].",
+      "correctness_scores": {
+        "correctness": 0.5,
+        "relevance": 0.5,
+        "topic_coverage": 0.3,
+        "overall": 0.43
+      },
+      "source_retrieval_score": 0.0,
+      "confidence": {
+        "retrieval_confidence": 0.68,
+        "citation_coverage": 1.0,
+        "completeness": 0.9,
+        "composite_score": 0.852
+      },
+      "citations_verified": 2,
+      "citations_supported": 2
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+{
+  "fixed": {
+    "chunks_count": 3771,
+    "avg_correctness": 0.89,
+    "avg_source_retrieval": 0.688,
+    "avg_confidence": 0.903,
+    "avg_citation_accuracy": 1.0,
+    "per_question": [
+      {
+        "question": "How do I create a basic FastAPI application?",
+        "correctness": 0.5,
+        "source_score": 1.0,
+        "confidence": 0.932,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "How do I define path parameters in FastAPI?",
+        "correctness": 1.0,
+        "source_score": 0.0,
+        "confidence": 0.844,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "What is the difference between path parameters and query parameters?",
+        "correctness": 0.89,
+        "source_score": 0.5,
+        "confidence": 0.868,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "How do I add request body validation in FastAPI?",
+        "correctness": 1.0,
+        "source_score": 1.0,
+        "confidence": 0.86,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "How do I add OAuth2 authentication to FastAPI?",
+        "correctness": 1.0,
+        "source_score": 0.5,
+        "confidence": 0.98,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "What is dependency injection in FastAPI?",
+        "correctness": 1.0,
+        "source_score": 0.5,
+        "confidence": 0.956,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "How do I deploy FastAPI with Docker?",
+        "correctness": 0.73,
+        "source_score": 1.0,
+        "confidence": 0.868,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "How do I add CORS support to FastAPI?",
+        "correctness": 1.0,
+        "source_score": 1.0,
+        "confidence": 0.916,
+        "citation_accuracy": 1.0
+      }
+    ]
+  },
+  "recursive": {
+    "chunks_count": 4284,
+    "avg_correctness": 0.871,
+    "avg_source_retrieval": 0.812,
+    "avg_confidence": 0.893,
+    "avg_citation_accuracy": 1.0,
+    "per_question": [
+      {
+        "question": "How do I create a basic FastAPI application?",
+        "correctness": 1.0,
+        "source_score": 1.0,
+        "confidence": 0.916,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "How do I define path parameters in FastAPI?",
+        "correctness": 0.75,
+        "source_score": 1.0,
+        "confidence": 0.748,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "What is the difference between path parameters and query parameters?",
+        "correctness": 0.83,
+        "source_score": 0.5,
+        "confidence": 0.868,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "How do I add request body validation in FastAPI?",
+        "correctness": 1.0,
+        "source_score": 1.0,
+        "confidence": 0.86,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "How do I add OAuth2 authentication to FastAPI?",
+        "correctness": 0.83,
+        "source_score": 0.5,
+        "confidence": 0.948,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "What is dependency injection in FastAPI?",
+        "correctness": 1.0,
+        "source_score": 0.5,
+        "confidence": 0.964,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "How do I deploy FastAPI with Docker?",
+        "correctness": 0.73,
+        "source_score": 1.0,
+        "confidence": 0.924,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "How do I add CORS support to FastAPI?",
+        "correctness": 0.83,
+        "source_score": 1.0,
+        "confidence": 0.916,
+        "citation_accuracy": 1.0
+      }
+    ]
+  },
+  "semantic": {
+    "chunks_count": 1465,
+    "avg_correctness": 0.851,
+    "avg_source_retrieval": 0.75,
+    "avg_confidence": 0.868,
+    "avg_citation_accuracy": 1.0,
+    "per_question": [
+      {
+        "question": "How do I create a basic FastAPI application?",
+        "correctness": 0.63,
+        "source_score": 1.0,
+        "confidence": 0.86,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "How do I define path parameters in FastAPI?",
+        "correctness": 1.0,
+        "source_score": 1.0,
+        "confidence": 0.812,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "What is the difference between path parameters and query parameters?",
+        "correctness": 0.93,
+        "source_score": 1.0,
+        "confidence": 0.876,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "How do I add request body validation in FastAPI?",
+        "correctness": 1.0,
+        "source_score": 0.0,
+        "confidence": 0.804,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "How do I add OAuth2 authentication to FastAPI?",
+        "correctness": 0.75,
+        "source_score": 0.5,
+        "confidence": 0.924,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "What is dependency injection in FastAPI?",
+        "correctness": 1.0,
+        "source_score": 0.5,
+        "confidence": 0.924,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "How do I deploy FastAPI with Docker?",
+        "correctness": 0.5,
+        "source_score": 1.0,
+        "confidence": 0.884,
+        "citation_accuracy": 1.0
+      },
+      {
+        "question": "How do I add CORS support to FastAPI?",
+        "correctness": 1.0,
+        "source_score": 1.0,
+        "confidence": 0.86,
+        "citation_accuracy": 1.0
+      }
+    ]
+  }
+}
