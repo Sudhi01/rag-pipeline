@@ -3,8 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 import json
-import subprocess
-import os
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -99,16 +97,6 @@ def list_documents():
 @app.post("/v1/ingest")
 def ingest_documents(request: IngestRequest):
     try:
-        # Auto clone FastAPI docs if not present
-        if not os.path.exists("fastapi"):
-            print("Cloning FastAPI docs...")
-            subprocess.run([
-                "git", "clone",
-                "https://github.com/tiangolo/fastapi.git",
-                "--depth=1"
-            ], check=True)
-            print("Cloned successfully")
-
         from src.ingestion.document_loader import load_documents_from_directory
         from src.ingestion.chunker import chunk_documents
         from src.ingestion.embedder import embed_and_store_chunks
@@ -116,10 +104,7 @@ def ingest_documents(request: IngestRequest):
 
         docs = load_documents_from_directory(request.directory)
         if not docs:
-            raise HTTPException(
-                status_code=400,
-                detail="No documents found in directory"
-            )
+            raise HTTPException(status_code=400, detail="No documents found")
 
         chunks = chunk_documents(docs, strategy=request.strategy)
         embed_result = embed_and_store_chunks(chunks)
@@ -133,8 +118,6 @@ def ingest_documents(request: IngestRequest):
             "chunks_skipped": embed_result["skipped"],
             "strategy": request.strategy
         }
-    except HTTPException:
-        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
