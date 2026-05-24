@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 import json
 
-API_URL = "http://localhost:8000"
+API_URL = "https://rag-pipeline-production-863f.up.railway.app"
 
 st.set_page_config(
     page_title="RAG Pipeline Dashboard",
